@@ -22,6 +22,7 @@ export default {
   },
   data() {
     return {
+      searched: this.queryWord,
       heading: '',
       words: [],
       errors: []
@@ -30,13 +31,13 @@ export default {
   created() {
     axios
       .get(
-        `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/exasperated?key=${key}`
+        `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${searched}?key=${key}`
       )
       .then(response => {
         console.log(response)
         if (response.data[0].meta) {
           this.words = response.data[0].meta.syns[0]
-          this.heading = `Synonyms for ${queryWord}`
+          this.heading = `Synonyms for ${searched}`
         } else {
           this.heading =
             'Hmm...Tyrannothesaurus could not find that word.  Did you mean one of these?'
