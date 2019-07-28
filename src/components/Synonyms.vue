@@ -14,25 +14,26 @@
         </v-fade-transition>
       </v-text-field>
       <h2>{{ heading }}</h2>
-      <v-card>
-        <ul v-if="words && words.length">
-          <a class="word-link" href="#">
-            <li v-for="word of words" :key="word">{{ word }}</li>
-          </a>
-        </ul>
-        <ul v-if="errors && errors.length">
-          <li
-            v-for="error of errors"
-            :key="`${this.queryWord}_${error.message}`"
+      <v-card v-if="words && words.length" solo>
+        <v-chip-group multiple column>
+          <v-chip
+            v-for="(word, i) in words"
+            :key="i"
+            @click="newQueryWord(word)"
+            >{{ word }}</v-chip
           >
-            {{ error.message }}
-          </li>
-        </ul>
+        </v-chip-group>
+      </v-card>
+      <v-card v-if="errors && errors.length">
+        <v-card-text
+          v-for="(error, i) of errors"
+          :key="`${i}_${error.message}`"
+          >{{ error.message }}</v-card-text
+        >
       </v-card>
     </v-content>
   </v-container>
 </template>
-
 <script>
 import getWords from '../utils/apiCall'
 
@@ -46,14 +47,20 @@ export default {
       errors: []
     }
   },
+  created() {
+    getWords('great').then(result => console.log(result))
+  },
   methods: {
+    newQueryWord(word) {
+      this.queryWord = word
+      this.lookUp()
+    },
     lookUp() {
-      console.log('got to lookUp')
       getWords(this.queryWord)
         .then(result => {
           if (result.synonyms) {
             this.words = result.synonyms
-            this.heading = `Synonyms for ${queryWord}`
+            this.heading = `Synonyms for ${this.queryWord}`
           } else if (result.didYouMean) {
             this.heading =
               'Hmm...Tyrannothesaurus could not find that word.  Did you mean one of these?'
@@ -64,9 +71,6 @@ export default {
           this.errors.push(e)
         })
     }
-  },
-  created() {
-    getWords('great').then(result => console.log(result))
   }
 }
 </script>
