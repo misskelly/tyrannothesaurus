@@ -13,17 +13,40 @@
           >
         </v-fade-transition>
       </v-text-field>
-      <h2>{{ heading }}</h2>
-      <v-card v-if="words && words.length" solo>
+      <v-layout justify-space-around>
+        <v-flex xs12 sm10 md10 lg10>
+          <h3 class="dynamic-heading">{{ heading }}</h3>
+          <v-divider v-if="heading" :inset="inset"></v-divider>
+          <v-chip-group max="0" column active-class="primary--text">
+            <v-chip
+              v-for="(word, i) in words"
+              :key="i"
+              large
+              color="primary"
+              outlined
+              @input="newQueryWord(word)"
+              >{{ word }}
+              <v-icon color="primary" right
+                >mdi-arrow-right-circle-outline</v-icon
+              >
+            </v-chip>
+          </v-chip-group>
+        </v-flex>
+      </v-layout>
+      <!-- <v-card v-if="words && words.length" solo>
         <v-chip-group multiple column>
           <v-chip
             v-for="(word, i) in words"
             :key="i"
+            outlined
+            large
+            color="teal"
             @click="newQueryWord(word)"
-            >{{ word }}</v-chip
-          >
+            >{{ word }}
+            <v-icon right>mdi-account-outline</v-icon>
+          </v-chip>
         </v-chip-group>
-      </v-card>
+      </v-card> -->
       <v-card v-if="errors && errors.length">
         <v-card-text
           v-for="(error, i) of errors"
@@ -53,6 +76,7 @@ export default {
   methods: {
     newQueryWord(word) {
       this.queryWord = word
+      // remove(word)
       this.lookUp()
     },
     lookUp() {
@@ -79,5 +103,12 @@ export default {
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+v-chip::before {
+  background-color: currentColor;
+}
+.chip-active {
+  background-color: white;
 }
 </style>
