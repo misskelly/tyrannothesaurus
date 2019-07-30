@@ -4,9 +4,8 @@
       <v-flex xs12>
         <h1 class="main-heading">Tyrannothesaurus</h1>
         <h2 class="text-bubble">
-          Salutations, perchance might I engage you with an assemblance of
-          sophisticated verbalism? Input your selection below to behold an array
-          of synonyms....
+          Salutations, perchance might I engage you with an assemblage of
+          sophisticated verbalism?
         </h2>
         <v-img
           :src="require('../assets/tyrannothesaurus.png')"

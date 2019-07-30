@@ -22,3 +22,8 @@ export default {
   })
 }
 </script>
+<style>
+main {
+  background: #ffffff;
+}
+</style>

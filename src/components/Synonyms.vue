@@ -1,23 +1,24 @@
 <template>
   <v-container>
     <v-content>
-      <v-text-field
-        v-model="queryWord"
-        label="Enter a word"
-        solo
-        @keydown.enter="lookUp"
-      >
-        <v-fade-transition slot="append">
-          <v-icon v-if="queryWord" @click="lookUp"
-            >mdi-book-search-outline</v-icon
-          >
-        </v-fade-transition>
-      </v-text-field>
       <v-layout justify-space-around>
         <v-flex xs12 sm10 md10 lg10>
+          <v-text-field
+            v-model="queryWord"
+            class-name="input"
+            label="Enter a word"
+            solo
+            @keydown.enter="lookUp"
+          >
+            <v-fade-transition slot="append">
+              <v-icon v-if="queryWord" @click="lookUp"
+                >mdi-book-search-outline</v-icon
+              >
+            </v-fade-transition>
+          </v-text-field>
           <h3 class="dynamic-heading">{{ heading }}</h3>
           <v-divider v-if="heading" :inset="inset"></v-divider>
-          <v-chip-group max="0" column active-class="primary--text">
+          <v-chip-group column active-class="primary--text">
             <v-chip
               v-for="(word, i) in words"
               :key="i"
@@ -33,20 +34,6 @@
           </v-chip-group>
         </v-flex>
       </v-layout>
-      <!-- <v-card v-if="words && words.length" solo>
-        <v-chip-group multiple column>
-          <v-chip
-            v-for="(word, i) in words"
-            :key="i"
-            outlined
-            large
-            color="teal"
-            @click="newQueryWord(word)"
-            >{{ word }}
-            <v-icon right>mdi-account-outline</v-icon>
-          </v-chip>
-        </v-chip-group>
-      </v-card> -->
       <v-card v-if="errors && errors.length">
         <v-card-text
           v-for="(error, i) of errors"
@@ -105,10 +92,24 @@ ul {
   padding: 0;
 }
 
-v-chip::before {
-  background-color: currentColor;
+input {
+  font-weight: bold;
 }
-.chip-active {
-  background-color: white;
+.dynamic-heading {
+  font-family: 'IM Fell Great Primer SC', serif;
+  margin-top: 2rem;
+  letter-spacing: 1px;
+}
+
+.v-chip:before {
+  background-color: white !important;
+}
+
+.v-chip__content {
+  color: black !important;
+}
+
+.v-divider {
+  margin: 1rem 0 2rem 0;
 }
 </style>
