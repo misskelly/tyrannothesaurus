@@ -3,10 +3,6 @@
     <v-layout text-center wrap>
       <v-flex xs12>
         <h1 class="main-heading">Tyrannothesaurus</h1>
-        <!-- <h2 class="text-bubble">
-          Salutations, perchance might I engage you with an assemblage of
-          sophisticated verbalism?
-        </h2> -->
         <v-img
           :src="require('../assets/tyrannothesaurus.png')"
           class="my-3"
