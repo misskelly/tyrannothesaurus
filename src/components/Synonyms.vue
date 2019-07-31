@@ -17,7 +17,7 @@
             </v-fade-transition>
           </v-text-field>
           <h3 class="dynamic-heading">{{ heading }}</h3>
-          <v-divider v-if="heading" :inset="inset"></v-divider>
+          <v-divider v-if="heading"></v-divider>
           <v-chip-group column active-class="primary--text">
             <v-chip
               v-for="(word, i) in words"
@@ -63,7 +63,6 @@ export default {
   methods: {
     newQueryWord(word) {
       this.queryWord = word
-      // remove(word)
       this.lookUp()
     },
     lookUp() {
@@ -87,16 +86,16 @@ export default {
 </script>
 
 <style>
-ul {
-  list-style-type: none;
-  padding: 0;
+body {
+  font-family: 'Aleo', serif;
 }
 
-input {
-  font-weight: bold;
+.dynamic-heading,
+.v-chip__content,
+#input-12 {
+  font-family: 'Aleo', serif !important;
 }
 .dynamic-heading {
-  font-family: 'IM Fell Great Primer SC', serif;
   margin-top: 2rem;
   letter-spacing: 1px;
 }
